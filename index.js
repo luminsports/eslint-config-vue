@@ -5,8 +5,8 @@ module.exports = {
     '@vue/standard'
   ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-console': ['error', {'allow': ['warn', 'error']}],
+    'no-debugger': 'error',
     'camelcase': 'off',
     'vue/singleline-html-element-content-newline': 'off',
     'vue/max-attributes-per-line': ['error', {
@@ -16,7 +16,9 @@ module.exports = {
     'vue/html-closing-bracket-newline': ['error', {
       singleline: 'never',
       multiline: 'never'
-    }]
+    }],
+    'no-undef': 'off',
+    'no-unused-vars': 'off'
   },
   parserOptions: {
     parser: require.resolve('@typescript-eslint/parser')

@@ -1,26 +1,31 @@
 {
-  "name": "@luminsports/eslint-config",
-  "version": "1.0.0",
-  "description": "eslint-config for Lumin Sports projects",
-  "main": "index.js",
-  "private": true,
-  "publishConfig": {
-    "access": "public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@gitlab.com:luminsports/eslint-config.git"
-  },
-  "keywords": [
-    "lumin",
-    "eslint"
-  ],
-  "author": "Lumin Sports",
-  "homepage": "https://github.com/vuejs/vue-cli/tree/dev/packages/@vue/eslint-config-typescript#readme",
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.2.0",
-    "@vue/eslint-config-standard": "^4.0.0",
-    "eslint-plugin-vue": "^5.0.0"
-  }
+    "name": "@luminsports/eslint-config-vue",
+    "version": "1.0.0",
+    "description": "eslint-config-vue for Lumin Sports projects",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@gitlab.com:luminsports/eslint-config.git"
+    },
+    "keywords": [
+        "lumin",
+        "eslint"
+    ],
+    "author": "Lumin Sports",
+    "contributors": [
+        {
+            "name": "Ryan Brereton-Canham",
+            "email": "ryan@luminsports.com"
+        },
+        {
+            "name": "Sam Cassar",
+            "email": "scassar@luminsports.com"
+        }
+    ],
+    "dependencies": {
+        "@typescript-eslint/eslint-plugin": "^2.2.0",
+        "@typescript-eslint/parser": "^2.2.0",
+        "@vue/eslint-config-standard": "^4.0.0",
+        "eslint-plugin-vue": "^5.0.0"
+    }
 }

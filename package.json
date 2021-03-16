@@ -1,6 +1,6 @@
 {
   "name": "@luminsports/eslint-config-vue",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "eslint-config-vue for Lumin Sports projects",
   "main": "index.js",
   "repository": {
@@ -23,9 +23,9 @@
     }
   ],
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.33.0",
-    "@typescript-eslint/parser": "^2.33.0",
-    "@vue/eslint-config-typescript": "^5.0.2",
-    "eslint-plugin-vue": "^6.2.2"
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "eslint-plugin-vue": "^7.2.0"
   }
 }

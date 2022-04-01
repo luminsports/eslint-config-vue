@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com:luminsports/eslint-config.git"
+    "url": "git@github.com:luminsports/eslint-config-vue.git"
   },
   "keywords": [
     "lumin",

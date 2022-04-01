@@ -20,6 +20,7 @@ module.exports = {
     'no-debugger': 'error',
     'no-undef': 'off',
     'no-multi-spaces': ['error'],
+    'space-in-parens': ['error', 'never'],
     'object-curly-spacing': ['error', 'always'],
     'vue/html-closing-bracket-newline': ['error', {
       singleline: 'never',

@@ -22,6 +22,8 @@ module.exports = {
     'no-multi-spaces': ['error'],
     'space-in-parens': ['error', 'never'],
     'object-curly-spacing': ['error', 'always'],
+    'function-call-argument-newline': ['error', 'consistent'],
+    'function-paren-newline': ['error', 'consistent'],
     'vue/html-closing-bracket-newline': ['error', {
       singleline: 'never',
       multiline: 'never'

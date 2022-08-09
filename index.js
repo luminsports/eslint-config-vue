@@ -8,6 +8,9 @@ module.exports = {
     ecmaVersion: 2020,
     project: ['./tsconfig.json'],
   },
+  plugins: [
+    'unused-imports'
+  ],
   settings: {
     'import/resolver': {
       'typescript': true,
@@ -16,32 +19,6 @@ module.exports = {
   },
   rules: {
     'semi': 'off',
-    '@typescript-eslint/ban-ts-ignore': 'off',
-    '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/member-delimiter-style': ['error', {
-      multiline: { delimiter: 'none' },
-      singleline: { delimiter: 'comma' }
-    }],
-    '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-unused-vars': ['error', {'args': 'none', 'ignoreRestSiblings': true}],
-    '@typescript-eslint/consistent-type-exports': ['error', {
-      fixMixedExportsWithInlineTypeSpecifier: true
-    }],
-    '@typescript-eslint/consistent-type-imports': ['error', {
-      prefer: 'type-imports'
-    }],
-    '@typescript-eslint/consistent-indexed-object-style': [
-      'error',
-      'record'
-    ],
-    '@typescript-eslint/consistent-generic-constructors': [
-      'error',
-      'constructor'
-    ],
-    '@typescript-eslint/semi': ['error', 'never'],
     'camelcase': 'off',
     'no-console': ['error', {'allow': ['warn', 'error']}],
     'no-debugger': 'error',
@@ -73,5 +50,34 @@ module.exports = {
       multiline: 1
     }],
     'vue/singleline-html-element-content-newline': 'off',
+
+    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/camelcase': 'off',
+    '@typescript-eslint/member-delimiter-style': ['error', {
+      multiline: { delimiter: 'none' },
+      singleline: { delimiter: 'comma' }
+    }],
+    '@typescript-eslint/no-inferrable-types': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/consistent-type-exports': ['error', {
+      fixMixedExportsWithInlineTypeSpecifier: true
+    }],
+    '@typescript-eslint/consistent-type-imports': ['error', {
+      prefer: 'type-imports'
+    }],
+    '@typescript-eslint/consistent-indexed-object-style': [
+      'error',
+      'record'
+    ],
+    '@typescript-eslint/consistent-generic-constructors': [
+      'error',
+      'constructor'
+    ],
+    '@typescript-eslint/semi': ['error', 'never'],
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': ['error', {'args': 'none', 'ignoreRestSiblings': true}],
   },
 }

@@ -21,7 +21,7 @@ module.exports = {
     }
   },
   rules: {
-    '@typescript-eslint/ban-ts-ignore': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/brace-style': 'error',
     '@typescript-eslint/camelcase': 'off',
     '@typescript-eslint/consistent-generic-constructors': ['error', 'constructor'],
@@ -83,5 +83,8 @@ module.exports = {
     'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
     'vue/max-attributes-per-line': ['error', { singleline: 3, multiline: 1 }],
     'vue/singleline-html-element-content-newline': 'off',
+    'vue/valid-v-slot': ['error', {
+      'allowModifiers': true
+    }]
   }
 }

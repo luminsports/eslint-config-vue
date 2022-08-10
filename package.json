@@ -27,7 +27,9 @@
     "@typescript-eslint/parser": "^5.26.0",
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint-import-resolver-typescript": "^3.4.0",
+    "eslint-plugin-canonical": "^3.1.0",
     "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-import-newlines": "^1.2.3",
     "eslint-plugin-unused-imports": "^2.0.0",
     "eslint-plugin-vue": "^9.0.1"
   }

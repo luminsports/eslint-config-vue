@@ -28,6 +28,15 @@ module.exports = {
     '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
     '@typescript-eslint/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
     '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+    '@typescript-eslint/indent': ['error', 2, {
+      FunctionExpression: { parameters: 'first' },
+      ignoredNodes: [
+        "PropertyDefinition[decorators]",
+        'FunctionExpression > .params[decorators.length > 0]',
+        'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
+        'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',
+      ],
+    }],
     '@typescript-eslint/member-delimiter-style': ['error', {
       multiline: { delimiter: 'none' },
       singleline: { delimiter: 'comma' }
@@ -63,7 +72,7 @@ module.exports = {
       'max-len': 100,
       'semi': false
     }],
-    'indent': ['error', 2, { FunctionExpression: { parameters: 'first' } }],
+    'indent': 'off',
     'keyword-spacing': ['error', { before: true, after: true }],
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',

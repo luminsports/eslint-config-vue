@@ -1,6 +1,6 @@
 {
   "name": "@luminsports/eslint-config-vue",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "eslint-config-vue for Lumin Sports projects",
   "main": "index.js",
   "repository": {

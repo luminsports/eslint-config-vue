@@ -3,9 +3,21 @@ module.exports = {
     'plugin:vue/recommended',
     '@vue/typescript/recommended'
   ],
+  parser: "vue-eslint-parser",
   parserOptions: {
-    parser: '@typescript-eslint/parser',
-    ecmaVersion: 2020,
+    parser: {
+      // Script parser for `<script>`
+      js: "@typescript-eslint/parser",
+
+      // Script parser for `<script lang="ts">`
+      ts: "@typescript-eslint/parser",
+
+      // Script parser for vue directives (e.g. `v-if=` or `:attribute=`)
+      // and vue interpolations (e.g. `{{variable}}`).
+      // If not specified, the parser determined by `<script lang ="...">` is used.
+      "<template>": "espree",
+    },
+    extraFileExtensions: [".vue"],
     project: ['./tsconfig.json'],
   },
   plugins: [
@@ -41,7 +53,8 @@ module.exports = {
       multiline: { delimiter: 'none' },
       singleline: { delimiter: 'comma' }
     }],
-    '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreVoidOperator: true }],
+    // temporarily disabled due to "Maximum call stack size exceeded" error
+    // '@typescript-eslint/no-confusing-void-expression': ['error', { ignoreVoidOperator: true }],
     'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
     '@typescript-eslint/no-empty-interface': 'off',
     '@typescript-eslint/no-explicit-any': 'off',

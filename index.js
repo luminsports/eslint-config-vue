@@ -23,7 +23,6 @@ module.exports = {
   plugins: [
     'import',
     'import-newlines',
-    'canonical',
     'unused-imports'
   ],
   settings: {
@@ -39,7 +38,7 @@ module.exports = {
     '@typescript-eslint/consistent-generic-constructors': ['error', 'constructor'],
     '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
     '@typescript-eslint/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
-    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports', fixStyle: 'inline-type-imports' }],
     '@typescript-eslint/indent': ['error', 2, {
       FunctionExpression: { parameters: 'first' },
       ignoredNodes: [
@@ -67,7 +66,6 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'brace-style': 'off',
     'camelcase': 'off',
-    'canonical/prefer-inline-type-import': 'error',
     'comma-spacing': ['error', { before: false, after: true }],
     'comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false }}],
     'computed-property-spacing': ['error', 'never'],

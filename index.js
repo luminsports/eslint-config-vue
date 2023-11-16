@@ -1,7 +1,7 @@
 module.exports = {
   extends: [
     'plugin:vue/recommended',
-    'plugin:vue/vue3-essential',
+    'plugin:vue/vue3-recommended',
     '@vue/typescript/recommended',
   ],
   parser: "vue-eslint-parser",
@@ -24,7 +24,8 @@ module.exports = {
   plugins: [
     'import',
     'import-newlines',
-    'unused-imports'
+    'unused-imports',
+    'disable-autofix'
   ],
   settings: {
     'import/resolver': {
@@ -79,6 +80,9 @@ module.exports = {
     'import/default': 'error',
     'import/export': 'error',
     'import/no-duplicates': 'error',
+    'import/no-useless-path-segments': ['error', {
+      noUselessIndex: true,
+    }],
     'import-newlines/enforce': ['error', {
       'items': 5,
       'max-len': 100,
@@ -106,6 +110,10 @@ module.exports = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/valid-v-slot': ['error', {
       'allowModifiers': true
-    }]
+    }],
+    // vue3 compatibility warnings
+    'vue/no-v-for-template-key-on-child': 'warn',
+    'vue/no-deprecated-v-bind-sync': 'off',
+    'disable-autofix/vue/no-deprecated-v-bind-sync': 'warn',
   }
 }

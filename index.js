@@ -79,7 +79,9 @@ module.exports = {
     'import/namespace': 'error',
     'import/default': 'error',
     'import/export': 'error',
+    'import/no-cycle': 'error',
     'import/no-duplicates': 'error',
+    'import/no-self-import': 'error',
     'import/no-useless-path-segments': ['error', {
       noUselessIndex: true,
     }],

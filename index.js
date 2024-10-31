@@ -148,7 +148,7 @@ module.exports = {
     'disable-autofix/vue/no-deprecated-v-bind-sync': 'warn',
   },
   overrides: [{
-    files: ['export.ts'],
+    files: ['**/export.ts'],
     rules: {
       'no-barrel-files/no-barrel-files': 'off'
     }

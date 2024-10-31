@@ -3,6 +3,7 @@ module.exports = {
     'plugin:vue/recommended',
     'plugin:vue/vue3-recommended',
     '@vue/typescript/recommended',
+    'plugin:deprecation/recommended',
   ],
   parser: "vue-eslint-parser",
   parserOptions: {
@@ -25,7 +26,8 @@ module.exports = {
     'import',
     'import-newlines',
     'unused-imports',
-    'disable-autofix'
+    'disable-autofix',
+    'no-barrel-files'
   ],
   settings: {
     'import/resolver': {
@@ -40,7 +42,10 @@ module.exports = {
     '@typescript-eslint/consistent-generic-constructors': ['error', 'constructor'],
     '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
     '@typescript-eslint/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
-    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports', fixStyle: 'inline-type-imports' }],
+    '@typescript-eslint/consistent-type-imports': ['error', {
+      prefer: 'type-imports',
+      fixStyle: 'inline-type-imports'
+    }],
     '@typescript-eslint/indent': ['error', 2, {
       FunctionExpression: { parameters: 'first' },
       ignoredNodes: [
@@ -69,7 +74,7 @@ module.exports = {
     'brace-style': 'off',
     'camelcase': 'off',
     'comma-spacing': ['error', { before: false, after: true }],
-    'comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false }}],
+    'comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
     'computed-property-spacing': ['error', 'never'],
     'func-call-spacing': ['error', 'never'],
     'function-call-argument-newline': ['error', 'consistent'],
@@ -79,6 +84,22 @@ module.exports = {
     'import/namespace': 'error',
     'import/default': 'error',
     'import/export': 'error',
+    'import/order': [
+      "error",
+      {
+        'newlines-between': 'never',
+        'named': { enabled: true, import: true, export: true, require: true, types: "types-first" },
+        'alphabetize': {
+          order: "asc",
+        },
+        'groups': [
+          'builtin',
+          ['external', 'internal'],
+          ['parent', 'sibling', 'index'],
+          'object',
+        ]
+      }
+    ],
     'import/no-cycle': 'error',
     'import/no-duplicates': 'error',
     'import/no-self-import': 'error',
@@ -93,6 +114,7 @@ module.exports = {
     'indent': 'off',
     'keyword-spacing': ['error', { before: true, after: true }],
     'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-barrel-files/no-barrel-files': 'error',
     'no-debugger': 'error',
     'no-multi-spaces': 'error',
     'no-undef': 'off',

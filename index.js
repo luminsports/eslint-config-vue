@@ -5,21 +5,21 @@ module.exports = {
     '@vue/typescript/recommended',
     'plugin:deprecation/recommended',
   ],
-  parser: "vue-eslint-parser",
+  parser: 'vue-eslint-parser',
   parserOptions: {
     parser: {
       // Script parser for `<script>`
-      js: "@typescript-eslint/parser",
+      js: '@typescript-eslint/parser',
 
       // Script parser for `<script lang="ts">`
-      ts: "@typescript-eslint/parser",
+      ts: '@typescript-eslint/parser',
 
       // Script parser for vue directives (e.g. `v-if=` or `:attribute=`)
       // and vue interpolations (e.g. `{{variable}}`).
       // If not specified, the parser determined by `<script lang ="...">` is used.
-      "<template>": "espree",
+      '<template>': 'espree',
     },
-    extraFileExtensions: [".vue"],
+    extraFileExtensions: ['.vue'],
     project: ['./tsconfig.json'],
   },
   plugins: [
@@ -85,12 +85,12 @@ module.exports = {
     'import/default': 'error',
     'import/export': 'error',
     'import/order': [
-      "error",
+      'error',
       {
         'newlines-between': 'never',
-        'named': { enabled: true, import: true, export: true, require: true, types: "types-first" },
+        'named': { enabled: true, import: true, export: true, require: true, types: 'types-first' },
         'alphabetize': {
-          order: "asc",
+          order: 'asc',
         },
         'groups': [
           'builtin',
@@ -118,6 +118,12 @@ module.exports = {
     'no-debugger': 'error',
     'no-multi-spaces': 'error',
     'no-undef': 'off',
+    'no-restricted-imports': ['error', {
+      'patterns': [{
+        'group': ['@luminsports/**/export', '@luminsports/**/index', './**/export', './**/index', '../**/export', '../**/index'],
+        'message': 'Do not import from barrel files. Import from the specific file instead.'
+      }]
+    }],
     'object-curly-newline': ['error', { multiline: true, consistent: true }],
     'object-curly-spacing': ['error', 'always'],
     'prefer-const': 'error',
@@ -139,5 +145,11 @@ module.exports = {
     'vue/no-v-for-template-key-on-child': 'warn',
     'vue/no-deprecated-v-bind-sync': 'off',
     'disable-autofix/vue/no-deprecated-v-bind-sync': 'warn',
-  }
+  },
+  overrides: [{
+    files: ['export.ts'],
+    rules: {
+      'no-barrel-files/no-barrel-files': 'off'
+    }
+  }]
 }

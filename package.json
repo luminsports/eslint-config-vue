@@ -1,8 +1,8 @@
 {
   "name": "@luminsports/eslint-config-vue",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "eslint-config-vue for Lumin Sports projects",
-  "main": "index.mjs",
+  "main": "index.mts",
   "repository": {
     "type": "git",
     "url": "git@github.com:luminsports/eslint-config-vue.git"

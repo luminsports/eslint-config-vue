@@ -1,17 +1,12 @@
-import antfu, { type OptionsTypescript, type OptionsVue, type Awaitable, type OptionsConfig, type TypedFlatConfigItem, } from '@antfu/eslint-config'
-import { type FlatConfigComposer } from 'eslint-flat-config-utils'
-import { type Linter } from 'eslint'
+import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
 import disableAutofix from 'eslint-plugin-disable-autofix'
 
-type Config = OptionsConfig & Omit<TypedFlatConfigItem, 'files'>
-type UserConfig = Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>
-
-export default function configure (options: Config, ...userConfig: UserConfig[]) {
-  const vueOptions: OptionsVue | false = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
-  const tsOptions: OptionsTypescript | false = options.typescript === false ? false : (options.typescript === true ? {} : (options.typescript ?? {}))
+export default function configure (options, ...userConfig) {
+  const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
+  const tsOptions = options.typescript === false ? false : (options.typescript === true ? {} : (options.typescript ?? {}))
 
   return antfu({
     ...options,

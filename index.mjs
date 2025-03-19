@@ -2,7 +2,6 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
-import disableAutofix from 'eslint-plugin-disable-autofix'
 
 export default function configure (options, ...userConfig) {
   const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
@@ -22,7 +21,6 @@ export default function configure (options, ...userConfig) {
         // vue3 compatibility warnings
         'vue/no-v-for-template-key-on-child': 'warn',
         'vue/no-deprecated-v-bind-sync': 'off',
-        'disable-autofix/vue/no-deprecated-v-bind-sync': 'warn',
         ...vueOptions.overrides,
       }
     },
@@ -73,14 +71,7 @@ export default function configure (options, ...userConfig) {
     }
   }, ...userConfig)
   .override(
-    'antfu/vue', {
-      plugins: {
-        'disable-autofix': disableAutofix,
-      }
-    }
-  )
-  .override(
-    'antfu/imports', {
+    'antfu/imports/rules', {
       plugins: {
         'import-newlines': importNewlines,
       },

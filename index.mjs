@@ -2,7 +2,6 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
-import oxlint from 'eslint-plugin-oxlint'
 
 export default function configure (options, ...userConfig) {
   const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
@@ -13,6 +12,7 @@ export default function configure (options, ...userConfig) {
     vue: vueOptions === false ? false : {
       ...vueOptions,
       overrides: {
+        'unicorn/filename-case': ['error', { "case": "pascalCase" }],
         'vue/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
         'vue/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
         'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
@@ -22,6 +22,7 @@ export default function configure (options, ...userConfig) {
         'vue/valid-v-slot': ['error', {
           'allowModifiers': true
         }],
+        'vue/html-indent': 'off',
         // vue3 compatibility warnings
         'vue/no-v-for-template-key-on-child': 'warn',
         'vue/no-deprecated-v-bind-sync': 'off',
@@ -57,20 +58,23 @@ export default function configure (options, ...userConfig) {
     rules: {
       'no-barrel-files/no-barrel-files': 'off'
     }
-  }, ...userConfig, options.oxlint ? undefined : oxlint.configs['flat/recommended'] )
+  }, ...userConfig)
     .override(
       'antfu/imports/rules', {
       plugins: {
         'import-newlines': importNewlines,
       },
       settings: tsOptions && 'tsconfigPath' in tsOptions ? {
-        'import/resolver-next': [
+        'import-x/extensions': ['.ts', '.gts', '.js', '.cjs', '.mjs'],
+        'import-x/resolver-next': [
           createTypeScriptImportResolver({
             alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
             project: tsOptions.tsconfigPath,
-          }),
+          })
         ],
-      } : {},
+      } : {
+        'import/extensions': ['.ts', '.gts', '.js', '.cjs', '.mjs'],
+      },
       rules: {
         'import/no-unresolved': 'error',
         'import/named': 'error',

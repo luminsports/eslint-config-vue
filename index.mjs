@@ -18,6 +18,11 @@ export default function configure (options, ...userConfig) {
         'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
         'vue/custom-event-name-casing': ['error', 'kebab-case'],
         'vue/max-attributes-per-line': ['error', { singleline: 3, multiline: 1 }],
+        'vue/prefer-true-attribute-shorthand': ['error', 'always'],
+        'vue/prefer-use-template-ref': ['error'],
+        'vue/component-name-in-template-casing': ['error', 'PascalCase', {
+          'registeredComponentsOnly': false,
+        }],
         'vue/singleline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', {
           'allowModifiers': true

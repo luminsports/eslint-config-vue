@@ -12,7 +12,10 @@ export default function configure (options, ...userConfig) {
     vue: vueOptions === false ? false : {
       ...vueOptions,
       overrides: {
+        'vue/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
+        'vue/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
         'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
+        'vue/custom-event-name-casing': ['error', 'kebab-case'],
         'vue/max-attributes-per-line': ['error', { singleline: 3, multiline: 1 }],
         'vue/singleline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', {
@@ -28,35 +31,19 @@ export default function configure (options, ...userConfig) {
       ...tsOptions,
       overrides: {
         'ts/ban-ts-comment': 'off',
-        'ts/brace-style': 'error',
         'ts/camelcase': 'off',
         'ts/consistent-generic-constructors': ['error', 'constructor'],
         'ts/consistent-indexed-object-style': ['error', 'record'],
-        'ts/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
+        //'ts/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
         'ts/consistent-type-imports': ['error', {
           disallowTypeAnnotations: false,
           prefer: 'type-imports',
           fixStyle: 'inline-type-imports'
         }],
-        'ts/indent': ['error', 2, {
-          FunctionExpression: { parameters: 'first' },
-          ignoredNodes: [
-            "PropertyDefinition[decorators]",
-            'FunctionExpression > .params[decorators.length > 0]',
-            'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
-            'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',
-          ],
-        }],
-        'ts/member-delimiter-style': ['error', {
-          multiline: { delimiter: 'none' },
-          singleline: { delimiter: 'comma' }
-        }],
         // temporarily disabled due to "Maximum call stack size exceeded" error
         // 'ts/no-confusing-void-expression': ['error', { ignoreVoidOperator: true }],
         'ts/no-empty-interface': 'off',
         'ts/no-inferrable-types': 'off',
-        'ts/object-curly-spacing': ['error', 'always'],
-        'ts/semi': ['error', 'never'],
         ...tsOptions.overrides,
       }
     },
@@ -70,8 +57,8 @@ export default function configure (options, ...userConfig) {
       'no-barrel-files/no-barrel-files': 'off'
     }
   }, ...userConfig)
-  .override(
-    'antfu/imports/rules', {
+    .override(
+      'antfu/imports/rules', {
       plugins: {
         'import-newlines': importNewlines,
       },
@@ -89,7 +76,7 @@ export default function configure (options, ...userConfig) {
         'import/namespace': 'error',
         'import/default': 'error',
         'import/export': 'error',
-        'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
+        'import/consistent-type-specifier-style': 'off',
         'import/order': [
           'error',
           {
@@ -118,26 +105,48 @@ export default function configure (options, ...userConfig) {
         }],
       }
     }
-  )
-  .override(
-    'antfu/javascript', {
+    )
+    .override(
+      'antfu/stylistic/rules', {
+      rules: {
+        // conflicts with import/order
+        'perfectionist/sort-named-imports': 'off',
+        'perfectionist/sort-named-exports': 'off',
+        'perfectionist/sort-imports': 'off',
+        'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
+        'style/object-curly-spacing': ['error', 'always'],
+        'style/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
+        'style/object-curly-newline': ['error', { multiline: true, consistent: true }],
+        'style/object-curly-spacing': ['error', 'always'],
+        'style/quote-props': ['error', 'consistent-as-needed'],
+        'style/semi': ['error', 'never'],
+        'style/space-before-blocks': ['error', 'always'],
+        'style/space-in-parens': ['error', 'never'],
+        'style/space-infix-ops': 'error',
+        'style/object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
+        'style/array-bracket-spacing': ['error', 'never'],
+        'style/arrow-spacing': ['error', { before: true, after: true }],
+        'style/comma-spacing': ['error', { before: false, after: true }],
+        'style/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
+        'style/computed-property-spacing': ['error', 'never'],
+        'style/func-call-spacing': ['error', 'never'],
+        'style/function-call-argument-newline': ['error', 'consistent'],
+        'style/function-paren-newline': ['error', 'consistent'],
+        'style/keyword-spacing': ['error', { before: true, after: true }],
+        'style/member-delimiter-style': ['error', {
+          multiline: { delimiter: 'none' },
+          singleline: { delimiter: 'comma' }
+        }],
+      }
+    }
+    )
+    .override(
+      'antfu/javascript/rules', {
       plugins: {
         'no-barrel-files': noBarrelFiles,
       },
       rules: {
-        'object-property-newline': ['error', { allowAllPropertiesOnSameLine: true }],
-        'array-bracket-spacing': ['error', 'never'],
-        'arrow-spacing': ['error', { before: true, after: true }],
-        'brace-style': 'off',
         'camelcase': 'off',
-        'comma-spacing': ['error', { before: false, after: true }],
-        'comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
-        'computed-property-spacing': ['error', 'never'],
-        'func-call-spacing': ['error', 'never'],
-        'function-call-argument-newline': ['error', 'consistent'],
-        'function-paren-newline': ['error', 'consistent'],
-        'indent': 'off',
-        'keyword-spacing': ['error', { before: true, after: true }],
         'no-console': ['error', { allow: ['warn', 'error'] }],
         'no-barrel-files/no-barrel-files': 'error',
         'no-debugger': 'error',
@@ -149,16 +158,9 @@ export default function configure (options, ...userConfig) {
             'message': 'Do not import from barrel files. Import from the specific file instead.'
           }]
         }],
-        'object-curly-newline': ['error', { multiline: true, consistent: true }],
-        'object-curly-spacing': ['error', 'always'],
         'prefer-const': 'error',
-        'quote-props': ['error', 'consistent-as-needed'],
-        'semi': 'off',
-        'space-before-blocks': ['error', 'always'],
-        'space-in-parens': ['error', 'never'],
-        'space-infix-ops': 'error',
-        'space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
       }
     }
-  )
+    )
 }
+

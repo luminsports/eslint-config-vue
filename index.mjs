@@ -2,6 +2,7 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
+import oxlint from 'eslint-plugin-oxlint'
 
 export default function configure (options, ...userConfig) {
   const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
@@ -56,7 +57,7 @@ export default function configure (options, ...userConfig) {
     rules: {
       'no-barrel-files/no-barrel-files': 'off'
     }
-  }, ...userConfig)
+  }, ...userConfig, options.oxlint ? undefined : oxlint.configs['flat/recommended'] )
     .override(
       'antfu/imports/rules', {
       plugins: {

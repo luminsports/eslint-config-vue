@@ -39,8 +39,10 @@ export default function configure (options, ...userConfig) {
       overrides: {
         'ts/ban-ts-comment': 'off',
         'ts/camelcase': 'off',
+        'ts/explicit-function-return-type': 'off',
         'ts/consistent-generic-constructors': ['error', 'constructor'],
         'ts/consistent-indexed-object-style': ['error', 'record'],
+        'ts/strict-boolean-expressions': 'off',
         //'ts/consistent-type-exports': ['error', { fixMixedExportsWithInlineTypeSpecifier: true }],
         'ts/consistent-type-imports': ['error', {
           disallowTypeAnnotations: false,
@@ -64,17 +66,16 @@ export default function configure (options, ...userConfig) {
       'no-barrel-files/no-barrel-files': 'off'
     }
   }, ...userConfig)
-    .override(
-      'antfu/imports/rules', {
+    .override('antfu/imports/rules', {
       plugins: {
         'import-newlines': importNewlines,
       },
-      settings: tsOptions && 'tsconfigPath' in tsOptions ? {
+      settings: tsOptions && 'importTsconfigPath' in tsOptions ? {
         'import-x/extensions': ['.ts', '.gts', '.js', '.cjs', '.mjs'],
         'import-x/resolver-next': [
           createTypeScriptImportResolver({
             alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-            project: tsOptions.tsconfigPath,
+            project: tsOptions.importTsconfigPath,
           })
         ],
       } : {
@@ -114,10 +115,8 @@ export default function configure (options, ...userConfig) {
           'semi': false
         }],
       }
-    }
-    )
-    .override(
-      'antfu/stylistic/rules', {
+    })
+    .override('antfu/stylistic/rules', {
       rules: {
         // conflicts with import/order
         'perfectionist/sort-named-imports': 'off',
@@ -148,10 +147,13 @@ export default function configure (options, ...userConfig) {
           singleline: { delimiter: 'comma' }
         }],
       }
-    }
-    )
-    .override(
-      'antfu/javascript/rules', {
+    })
+    .override('antfu/jsdoc/rules', {
+      rules: {
+        'jsdoc/require-returns-description': 'off',
+      }
+    })
+    .override('antfu/javascript/rules', {
       plugins: {
         'no-barrel-files': noBarrelFiles,
       },
@@ -162,15 +164,26 @@ export default function configure (options, ...userConfig) {
         'no-debugger': 'error',
         'no-multi-spaces': 'error',
         'no-undef': 'off',
+        'no-unused-vars': 'off',
         'no-restricted-imports': ['error', {
           'patterns': [{
             'group': ['@luminsports/**/export', '@luminsports/**/index', './**/export', './**/index', '../**/export', '../**/index'],
             'message': 'Do not import from barrel files. Import from the specific file instead.'
           }]
         }],
+        'unused-imports/no-unused-vars': [
+          'error',
+          {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+            caughtErrors: 'none',
+            ignoreRestSiblings: true,
+            vars: 'all',
+            varsIgnorePattern: '^_',
+          },
+        ],
         'prefer-const': 'error',
       }
-    }
-    )
+    })
 }
 

@@ -2,11 +2,12 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
+import process from 'node:process'
 
 export default function configure (options, ...userConfig) {
   const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
   const tsOptions = options.typescript === false ? false : (options.typescript === true ? {} : (options.typescript ?? {}))
-
+  const allowBarrelFiles = options.allowBarrelFiles === true
   return antfu({
     ...options,
     vue: vueOptions === false ? false : {
@@ -16,7 +17,9 @@ export default function configure (options, ...userConfig) {
         'vue/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
         'vue/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
         'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
-        'vue/custom-event-name-casing': ['error', 'kebab-case'],
+        'vue/custom-event-name-casing': ['error', 'kebab-case', {
+          ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u']
+        }],
         'vue/max-attributes-per-line': ['error', { singleline: 3, multiline: 1 }],
         'vue/prefer-true-attribute-shorthand': ['error', 'always'],
         'vue/prefer-use-template-ref': ['error'],
@@ -57,7 +60,7 @@ export default function configure (options, ...userConfig) {
       }
     },
   }, {
-  }, {
+  }, allowBarrelFiles ? undefined : {
     files: ['**/export.ts'],
     plugins: {
       'no-barrel-files': noBarrelFiles
@@ -70,24 +73,11 @@ export default function configure (options, ...userConfig) {
       plugins: {
         'import-newlines': importNewlines,
       },
-      settings: tsOptions && 'importTsconfigPath' in tsOptions ? {
-        'import-x/extensions': ['.ts', '.gts', '.js', '.cjs', '.mjs'],
-        'import-x/resolver-next': [
-          createTypeScriptImportResolver({
-            alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-            project: tsOptions.importTsconfigPath,
-          })
-        ],
-      } : {
-        'import/extensions': ['.ts', '.gts', '.js', '.cjs', '.mjs'],
-      },
       rules: {
-        'import/no-unresolved': 'error',
         'import/named': 'error',
         'import/namespace': 'error',
         'import/default': 'error',
         'import/export': 'error',
-        'import/consistent-type-specifier-style': 'off',
         'import/order': [
           'error',
           {
@@ -153,24 +143,39 @@ export default function configure (options, ...userConfig) {
         'jsdoc/require-returns-description': 'off',
       }
     })
+    .override('antfu/typescript/rules-type-aware', {
+      settings: {
+        'import-x/resolver-next': [
+          createTypeScriptImportResolver({
+            project: tsOptions.tsconfigPath,
+            alwaysTryTypes: true,
+          })
+        ],
+      },
+      rules: {
+        'import/no-unresolved': 'error',
+        'import/consistent-type-specifier-style': 'off',
+        'ts/no-unsafe-assignment': 'off',
+        'ts/no-unsafe-call': 'off',
+        'ts/no-unsafe-argument': 'off',
+        'ts/no-unsafe-member-access': 'off',
+        'ts/strict-boolean-expressions': 'off',
+        'ts/no-unsafe-return': 'off',
+      }
+    })
     .override('antfu/javascript/rules', {
-      plugins: {
+      plugins: allowBarrelFiles ? {} : {
         'no-barrel-files': noBarrelFiles,
       },
       rules: {
         'camelcase': 'off',
         'no-console': ['error', { allow: ['warn', 'error'] }],
-        'no-barrel-files/no-barrel-files': 'error',
         'no-debugger': 'error',
         'no-multi-spaces': 'error',
         'no-undef': 'off',
         'no-unused-vars': 'off',
-        'no-restricted-imports': ['error', {
-          'patterns': [{
-            'group': ['@luminsports/**/export', '@luminsports/**/index', './**/export', './**/index', '../**/export', '../**/index'],
-            'message': 'Do not import from barrel files. Import from the specific file instead.'
-          }]
-        }],
+        'no-case-declarations': 'off',
+        'no-prototype-builtins': 'off',
         'unused-imports/no-unused-vars': [
           'error',
           {
@@ -182,6 +187,15 @@ export default function configure (options, ...userConfig) {
             varsIgnorePattern: '^_',
           },
         ],
+        ...(allowBarrelFiles ? {} : {
+          'no-barrel-files/no-barrel-files': 'error',
+          'no-restricted-imports': ['error', {
+            'patterns': [{
+              'group': ['@luminsports/**/export', '@luminsports/**/index', './**/export', './**/index', '../**/export', '../**/index'],
+              'message': 'Do not import from barrel files. Import from the specific file instead.'
+            }]
+          }],
+        }),
         'prefer-const': 'error',
       }
     })

@@ -2,9 +2,20 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
-import process from 'node:process'
+import fs from 'node:fs'
+
+function loadPackageName () {
+  try {
+    const packageJsonPath = fs.realpathSync('./package.json')
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'))
+    return packageJson.name
+  } catch (e) {
+    return undefined
+  }
+}
 
 export default function configure (options, ...userConfig) {
+  const packageName = options.packageName ?? loadPackageName()
   const vueOptions = options.vue === false ? false : (options.vue === true ? {} : (options.vue ?? {}))
   const tsOptions = options.typescript === false ? false : (options.typescript === true ? {} : (options.typescript ?? {}))
   const allowBarrelFiles = options.allowBarrelFiles === true
@@ -95,7 +106,9 @@ export default function configure (options, ...userConfig) {
             ]
           }
         ],
+        'import/no-duplicates': ['error', { 'prefer-inline': true }],
         'import/no-cycle': 'error',
+        'import/consistent-type-specifier-style': 'off',
         'import/no-useless-path-segments': ['error', {
           noUselessIndex: true,
         }],
@@ -144,6 +157,11 @@ export default function configure (options, ...userConfig) {
       }
     })
     .override('antfu/typescript/rules-type-aware', {
+      rules: {
+        'ts/no-floating-promises': 'off',
+      }
+    })
+    .override('antfu/typescript/rules-type-aware', {
       settings: {
         'import-x/resolver-next': [
           createTypeScriptImportResolver({
@@ -154,7 +172,6 @@ export default function configure (options, ...userConfig) {
       },
       rules: {
         'import/no-unresolved': 'error',
-        'import/consistent-type-specifier-style': 'off',
         'ts/no-unsafe-assignment': 'off',
         'ts/no-unsafe-call': 'off',
         'ts/no-unsafe-argument': 'off',
@@ -189,13 +206,23 @@ export default function configure (options, ...userConfig) {
         ],
         ...(allowBarrelFiles ? {} : {
           'no-barrel-files/no-barrel-files': 'error',
-          'no-restricted-imports': ['error', {
-            'patterns': [{
+        }),
+        'no-restricted-imports': ['error', {
+          'patterns': [
+            {
+              'regex': '^src\/',
+              'message': 'Importing from src directory is not allowed.'
+            },
+            packageName ? {
+              'regex': `^${packageName}`,
+              'message': 'Do not import from own library files. Use relative path imports instead.'
+            } : undefined,
+            allowBarrelFiles ? undefined : {
               'group': ['@luminsports/**/export', '@luminsports/**/index', './**/export', './**/index', '../**/export', '../**/index'],
               'message': 'Do not import from barrel files. Import from the specific file instead.'
-            }]
-          }],
-        }),
+            }
+          ].filter(p => !!p)
+        }],
         'prefer-const': 'error',
       }
     })

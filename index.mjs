@@ -38,10 +38,16 @@ export default function configure (options, ...userConfig) {
           'registeredComponentsOnly': false,
         }],
         'vue/singleline-html-element-content-newline': 'off',
+        'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
         'vue/valid-v-slot': ['error', {
           'allowModifiers': true
         }],
-        'vue/html-indent': 'off',
+        'vue/html-indent': ['error', 2, {
+          'attribute': 1,
+          'baseIndent': 1,
+          'closeBracket': 0,
+          'alignAttributesVertically': true,
+        }],
         // vue3 compatibility warnings
         'vue/no-v-for-template-key-on-child': 'warn',
         'vue/no-deprecated-v-bind-sync': 'off',

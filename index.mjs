@@ -2,6 +2,7 @@ import antfu from '@antfu/eslint-config'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import noBarrelFiles from 'eslint-plugin-no-barrel-files'
 import importNewlines from 'eslint-plugin-import-newlines'
+import pluginImport from 'eslint-plugin-import-x'
 import fs from 'node:fs'
 
 function loadPackageName () {
@@ -21,6 +22,10 @@ export default function configure (options, ...userConfig) {
   const allowBarrelFiles = options.allowBarrelFiles === true
   return antfu({
     ...options,
+    plugins: {
+      ...(options.plugins ?? {}),
+      import: pluginImport,
+    },
     vue: vueOptions === false ? false : {
       ...vueOptions,
       overrides: {
@@ -115,9 +120,16 @@ export default function configure (options, ...userConfig) {
         'import/no-duplicates': ['error', { 'prefer-inline': true }],
         'import/no-cycle': 'error',
         'import/consistent-type-specifier-style': 'off',
+        'import/first': 'error',
+        'import/no-duplicates': 'error',
+        'import/no-mutable-exports': 'error',
+        'import/no-named-default': 'error',
+        'import/no-self-import': 'error',
+        'import/no-webpack-loader-syntax': 'error',
         'import/no-useless-path-segments': ['error', {
           noUselessIndex: true,
         }],
+        'import/newline-after-import': ['error', { count: 1 }],
         'import-newlines/enforce': ['error', {
           'items': 5,
           'max-len': 100,
@@ -147,7 +159,7 @@ export default function configure (options, ...userConfig) {
         'style/comma-spacing': ['error', { before: false, after: true }],
         'style/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
         'style/computed-property-spacing': ['error', 'never'],
-        'style/func-call-spacing': ['error', 'never'],
+        'style/function-call-spacing': ['error', 'never'],
         'style/function-call-argument-newline': ['error', 'consistent'],
         'style/function-paren-newline': ['error', 'consistent'],
         'style/keyword-spacing': ['error', { before: true, after: true }],

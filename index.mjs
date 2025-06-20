@@ -24,7 +24,7 @@ export default function configure (options, ...userConfig) {
     ...options,
     plugins: {
       ...(options.plugins ?? {}),
-      import: pluginImport,
+      'import-x': pluginImport,
     },
     vue: vueOptions === false ? false : {
       ...vueOptions,
@@ -96,11 +96,17 @@ export default function configure (options, ...userConfig) {
         'import-newlines': importNewlines,
       },
       rules: {
-        'import/named': 'error',
-        'import/namespace': 'error',
-        'import/default': 'error',
-        'import/export': 'error',
-        'import/order': [
+        'import-x/named': 'error',
+        'import-x/namespace': 'error',
+        'import-x/default': 'error',
+        'import-x/export': 'error',
+        'import-x/no-cycle': 'error',
+        'import-x/no-self-import': 'error',
+        'import-x/no-webpack-loader-syntax': 'error',
+        'import-x/no-useless-path-segments': ['error', {
+          noUselessIndex: true,
+        }],
+        'import-x/order': [
           'error',
           {
             'newlines-between': 'never',
@@ -117,19 +123,12 @@ export default function configure (options, ...userConfig) {
             ]
           }
         ],
-        'import/no-duplicates': ['error', { 'prefer-inline': true }],
-        'import/no-cycle': 'error',
         'import/consistent-type-specifier-style': 'off',
         'import/first': 'error',
-        'import/no-duplicates': 'error',
+        'import/newline-after-import': ['error', { count: 1 }],
+        'import/no-duplicates': ['error', { 'prefer-inline': true }],
         'import/no-mutable-exports': 'error',
         'import/no-named-default': 'error',
-        'import/no-self-import': 'error',
-        'import/no-webpack-loader-syntax': 'error',
-        'import/no-useless-path-segments': ['error', {
-          noUselessIndex: true,
-        }],
-        'import/newline-after-import': ['error', { count: 1 }],
         'import-newlines/enforce': ['error', {
           'items': 5,
           'max-len': 100,
@@ -189,7 +188,7 @@ export default function configure (options, ...userConfig) {
         ],
       },
       rules: {
-        'import/no-unresolved': 'error',
+        'import-x/no-unresolved': 'error',
         'ts/no-unsafe-assignment': 'off',
         'ts/no-unsafe-call': 'off',
         'ts/no-unsafe-argument': 'off',

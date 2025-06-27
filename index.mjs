@@ -82,6 +82,9 @@ export default function configure (options, ...userConfig) {
       }
     },
   }, {
+    rules: {
+      'import/consistent-type-specifier-style': 'off',
+    }
   }, allowBarrelFiles ? undefined : {
     files: ['**/export.ts'],
     plugins: {

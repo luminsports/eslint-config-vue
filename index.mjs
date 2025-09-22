@@ -30,7 +30,7 @@ export default function configure (options, ...userConfig) {
       ...vueOptions,
       overrides: {
         'unicorn/filename-case': ['error', { "case": "pascalCase" }],
-        'vue/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
+        'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
         'vue/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
         'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
         'vue/custom-event-name-casing': ['error', 'kebab-case', {

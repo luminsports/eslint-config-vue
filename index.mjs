@@ -32,7 +32,6 @@ export default function configure (options, ...userConfig) {
         'unicorn/filename-case': ['error', { "case": "pascalCase" }],
         'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
         'vue/comma-style': ['error', 'last', { exceptions: { ImportDeclaration: false } }],
-        'vue/html-closing-bracket-newline': ['error', { singleline: 'never', multiline: 'never' }],
         'vue/custom-event-name-casing': ['error', 'kebab-case', {
           ignores: ['/^[a-z]+(?:-[a-z]+)*:[a-z]+(?:-[a-z]+)*$/u']
         }],
@@ -146,8 +145,7 @@ export default function configure (options, ...userConfig) {
         'perfectionist/sort-named-exports': 'off',
         'perfectionist/sort-imports': 'off',
         'style/brace-style': ['error', '1tbs', { allowSingleLine: true }],
-        'style/object-curly-spacing': ['error', 'always'],
-        'style/space-unary-ops': ['error', { words: true, nonwords: false, overrides: { '!': true } }],
+        'style/space-unary-ops': ['error', { words: true, nonwords: false }],
         'style/object-curly-newline': ['error', { multiline: true, consistent: true }],
         'style/object-curly-spacing': ['error', 'always'],
         'style/quote-props': ['error', 'consistent-as-needed'],

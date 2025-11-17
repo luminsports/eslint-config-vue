@@ -1,6 +1,6 @@
 {
   "name": "@luminsports/eslint-config-vue",
-  "version": "4.0.16",
+  "version": "4.0.17",
   "description": "eslint-config-vue for Lumin Sports projects",
   "types": "./index.d.ts",
   "exports": {
@@ -27,14 +27,14 @@
     }
   ],
   "dependencies": {
-    "@antfu/eslint-config": "^5.0.0",
+    "@antfu/eslint-config": "^5.4.1",
     "@vue/eslint-config-typescript": "^14.6.0",
-    "eslint-import-resolver-typescript": "^4.2.1",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-import-newlines": "^1.4",
-    "eslint-plugin-import-x": "^4.15.1",
-    "eslint-plugin-no-barrel-files": "^1.2.1",
-    "eslint-plugin-oxlint": "^1.0.0",
-    "eslint-plugin-vue": "^10.0",
-    "vue-eslint-parser": "^10.1"
+    "eslint-plugin-import-x": "^4.16.1",
+    "eslint-plugin-no-barrel-files": "^1.2.2",
+    "eslint-plugin-oxlint": "^1.28.0",
+    "eslint-plugin-vue": "^10.5",
+    "vue-eslint-parser": "^10.2"
   }
 }

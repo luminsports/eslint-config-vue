@@ -241,6 +241,9 @@ export default function configure (options = {}, ...userConfigs) {
     {
       name: 'luminsports/common-rules',
       files: ['**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,vue}'],
+      linterOptions: {
+        reportUnusedDisableDirectives: 'off',
+      },
       languageOptions: {
         ecmaVersion: 'latest',
         parserOptions: {

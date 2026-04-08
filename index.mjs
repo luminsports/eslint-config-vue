@@ -69,6 +69,7 @@ function createVueConfigs () {
     {
       name: 'luminsports/vue-rules',
       files: ['**/*.vue'],
+      processor: 'vue/vue',
       plugins: {
         vue: pluginVue,
       },
@@ -83,6 +84,7 @@ function createVueConfigs () {
       },
       rules: {
         'vue/comment-directive': 'error',
+        'vue/jsx-uses-vars': 'error',
         'vue/no-mutating-props': 'error',
         'vue/no-child-content': 'error',
         'vue/no-dupe-v-else-if': 'error',

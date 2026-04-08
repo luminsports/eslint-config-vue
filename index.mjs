@@ -69,7 +69,7 @@ function createVueConfigs () {
     {
       name: 'luminsports/vue-rules',
       files: ['**/*.vue'],
-      processor: 'vue/vue',
+      processor: pluginVue.processors['.vue'],
       plugins: {
         vue: pluginVue,
       },

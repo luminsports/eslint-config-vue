@@ -6,6 +6,7 @@ import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescrip
 import importNewlines from 'eslint-plugin-import-newlines'
 import pluginImportX from 'eslint-plugin-import-x'
 import unicorn from 'eslint-plugin-unicorn'
+import unusedImports from 'eslint-plugin-unused-imports'
 import pluginVue from 'eslint-plugin-vue'
 import vueParser from 'vue-eslint-parser'
 
@@ -23,6 +24,31 @@ function flattenUserConfigs (configs) {
   })
 }
 
+function isInEditorEnv() {
+  if (process.env.CI)
+    return false
+  if (isInGitHooksOrLintStaged())
+    return false
+  return !!(false
+    || process.env.VSCODE_PID
+    || process.env.VSCODE_CWD
+    || process.env.JETBRAINS_IDE
+    || process.env.VIM
+    || process.env.NVIM
+    || (process.env.ZED_ENVIRONMENT && !process.env.ZED_TERM)
+  )
+}
+
+function isInGitHooksOrLintStaged() {
+  return !!(false
+    || process.env.GIT_PARAMS
+    || process.env.VSCODE_GIT_COMMAND
+    || process.env.npm_lifecycle_script?.startsWith('lint-staged')
+  )
+}
+
+const isInEditor = isInEditorEnv()
+
 function createTypeScriptConfigs (tsconfigPath) {
   return [
     {
@@ -31,6 +57,7 @@ function createTypeScriptConfigs (tsconfigPath) {
       plugins: {
         typescript: typescriptPlugin,
         'import-x': pluginImportX,
+        'unused-imports': unusedImports,
       },
       languageOptions: {
         parser: typescriptParser,
@@ -58,6 +85,7 @@ function createTypeScriptConfigs (tsconfigPath) {
       } : {}),
       rules: {
         'typescript/method-signature-style': ['error', 'property'],
+        'unused-imports/no-unused-imports': isInEditor ? 'warn' : 'error',
         ...(tsconfigPath ? { 'import-x/no-unresolved': 'error' } : {}),
       },
     },
@@ -72,6 +100,7 @@ function createVueConfigs () {
       processor: pluginVue.processors['.vue'],
       plugins: {
         vue: pluginVue,
+        'unused-imports': unusedImports,
       },
       languageOptions: {
         parser: vueParser,
@@ -83,6 +112,7 @@ function createVueConfigs () {
         },
       },
       rules: {
+        'unused-imports/no-unused-imports': isInEditor ? 'warn' : 'error',
         'vue/comment-directive': 'error',
         'vue/jsx-uses-vars': 'error',
         'vue/no-mutating-props': 'error',

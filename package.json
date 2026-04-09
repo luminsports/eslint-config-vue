@@ -1,6 +1,6 @@
 {
   "name": "@luminsports/eslint-config-vue",
-  "version": "5.0.3",
+  "version": "5.0.4",
   "description": "eslint-config-vue for Lumin Sports projects",
   "types": "./index.d.ts",
   "exports": {
@@ -35,6 +35,7 @@
     "eslint-plugin-import-newlines": "^1.4.0",
     "eslint-plugin-import-x": "^4.16.1",
     "eslint-plugin-unicorn": "^61.0.2",
+    "eslint-plugin-unused-imports": "^4.0",
     "eslint-plugin-vue": "^10.5",
     "vue-eslint-parser": "^10.2"
   }

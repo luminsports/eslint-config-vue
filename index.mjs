@@ -99,6 +99,7 @@ function createVueConfigs () {
       files: ['**/*.vue'],
       processor: pluginVue.processors['.vue'],
       plugins: {
+        typescript: typescriptPlugin,
         vue: pluginVue,
         'unused-imports': unusedImports,
       },
@@ -109,10 +110,21 @@ function createVueConfigs () {
           extraFileExtensions: ['.vue'],
           parser: typescriptParser,
           sourceType: 'module',
+          ecmaFeatures: {
+            jsx: true,
+          },
         },
       },
       rules: {
         'unused-imports/no-unused-imports': isInEditor ? 'warn' : 'error',
+        'typescript/consistent-type-imports': [
+          'error',
+          {
+            disallowTypeAnnotations: false,
+            fixStyle: 'inline-type-imports',
+            prefer: 'type-imports',
+          },
+        ],
         ...pluginVue.configs.base.rules,
         ...pluginVue.configs['flat/essential'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),
         ...pluginVue.configs['flat/strongly-recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),

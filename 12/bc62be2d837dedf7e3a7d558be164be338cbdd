@@ -1,0 +1,19 @@
+.github/dependabot.yml
+  s_3d5e807b544448::t_4d883de0cb59ff 1-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.20",
+  "base_commit_sha": "12bc62be2d837dedf7e3a7d558be164be338cbdd",
+  "prompts": {},
+  "sessions": {
+    "s_3d5e807b544448": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f5f38-7781-7541-855c-37c938afa65f",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    }
+  }
+}

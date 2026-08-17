@@ -1,0 +1,43 @@
+.gitignore
+  s_b8cf2404efef48::t_b394e066091d56 12-25
+.github/workflows/release-and-publish.yml
+  s_044e32a157afd6::t_c0d8e86945d4cb 10-13,20,23,30
+package.json
+  s_0ad2bf62ec4ded::t_86ee86042420dd 3
+  s_0ad2bf62ec4ded::t_d9ba83af688678 31
+index.mjs
+  s_0ad2bf62ec4ded::t_d9ba83af688678 3,53-64,115,133-151
+  s_0ad2bf62ec4ded::t_ba5defd61d3e98 152-153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "17046152186feb885cfd6c2f264da46db6015e9f",
+  "prompts": {},
+  "sessions": {
+    "s_044e32a157afd6": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f6268-37fe-7fd3-aa4b-87f190dd0adf",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    },
+    "s_0ad2bf62ec4ded": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a00c5e-5e57-7d20-a89b-ee70f3c0192f",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    },
+    "s_b8cf2404efef48": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019fed85-3672-7e71-9c58-7c13b93d37ee",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    }
+  }
+}

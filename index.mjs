@@ -146,11 +146,50 @@ function createVueConfigs () {
           objects: 'always-multiline',
           tuples: 'always-multiline',
         }],
+        '@stylistic/function-call-argument-newline': ['error', 'consistent'],
+        '@stylistic/function-call-spacing': ['error', 'never'],
+        '@stylistic/function-paren-newline': ['error', 'consistent'],
         '@stylistic/jsx-closing-bracket-location': ['error', 'after-props'],
         '@stylistic/jsx-max-props-per-line': 'off',
         '@stylistic/linebreak-style': ['error', 'unix'],
         '@stylistic/max-statements-per-line': 'off',
         '@stylistic/no-mixed-operators': 'off',
+        '@stylistic/object-curly-newline': ['error', {
+          consistent: true,
+          multiline: true,
+        }],
+        '@stylistic/object-property-newline': ['error', {
+          allowAllPropertiesOnSameLine: true,
+        }],
+        'import-newlines/enforce': ['error', {
+          items: 5,
+          'max-len': 100,
+          semi: false,
+        }],
+        'import-x/newline-after-import': ['error', { count: 1 }],
+        'import-x/order': [
+          'error',
+          {
+            'newlines-between': 'never',
+            named: {
+              enabled: true,
+              export: true,
+              import: true,
+              require: true,
+              types: 'types-first',
+            },
+            alphabetize: {
+              order: 'asc',
+            },
+            groups: [
+              'builtin',
+              ['external', 'internal'],
+              'parent',
+              ['sibling', 'index'],
+              'object',
+            ],
+          },
+        ],
         'unused-imports/no-unused-imports': isInEditor ? 'warn' : 'error',
         'typescript/consistent-type-imports': [
           'error',
@@ -214,6 +253,7 @@ function createVueConfigs () {
         ],
         'vue/prefer-separate-static-class': 'error',
         'vue/prefer-template': 'error',
+        'vue/arrow-spacing': ['error', { after: true, before: true }],
         'vue/space-infix-ops': 'error',
         'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
         'vue/array-bracket-spacing': ['error', 'never'],

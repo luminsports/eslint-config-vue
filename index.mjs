@@ -1,5 +1,6 @@
 import antfu from 'eslint-plugin-antfu'
 import eslintComments from '@eslint-community/eslint-plugin-eslint-comments'
+import stylistic from '@stylistic/eslint-plugin'
 import typescriptPlugin from '@typescript-eslint/eslint-plugin'
 import typescriptParser from '@typescript-eslint/parser'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
@@ -48,6 +49,18 @@ function isInGitHooksOrLintStaged() {
 }
 
 const isInEditor = isInEditorEnv()
+
+const oxfmtCompatibleRules = stylistic.configs.customize({
+  arrowParens: false,
+  blockSpacing: true,
+  braceStyle: '1tbs',
+  commaDangle: 'always-multiline',
+  indent: 2,
+  jsx: true,
+  quoteProps: 'as-needed',
+  quotes: 'single',
+  semi: false,
+}).rules
 
 function createTypeScriptConfigs (tsconfigPath) {
   return [
@@ -99,6 +112,7 @@ function createVueConfigs () {
       files: ['**/*.vue'],
       processor: pluginVue.processors['.vue'],
       plugins: {
+        '@stylistic': stylistic,
         typescript: typescriptPlugin,
         vue: pluginVue,
         'unused-imports': unusedImports,
@@ -116,6 +130,27 @@ function createVueConfigs () {
         },
       },
       rules: {
+        ...oxfmtCompatibleRules,
+        '@stylistic/arrow-parens': ['error', 'as-needed', {
+          requireForBlockBody: false,
+        }],
+        '@stylistic/comma-dangle': ['error', {
+          arrays: 'always-multiline',
+          dynamicImports: 'never',
+          enums: 'always-multiline',
+          exports: 'always-multiline',
+          functions: 'never',
+          generics: 'always-multiline',
+          importAttributes: 'always-multiline',
+          imports: 'always-multiline',
+          objects: 'always-multiline',
+          tuples: 'always-multiline',
+        }],
+        '@stylistic/jsx-closing-bracket-location': ['error', 'after-props'],
+        '@stylistic/jsx-max-props-per-line': 'off',
+        '@stylistic/linebreak-style': ['error', 'unix'],
+        '@stylistic/max-statements-per-line': 'off',
+        '@stylistic/no-mixed-operators': 'off',
         'unused-imports/no-unused-imports': isInEditor ? 'warn' : 'error',
         'typescript/consistent-type-imports': [
           'error',

@@ -7,22 +7,27 @@ on:
     paths:
       - package.json
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Automatic GitHub Release
         uses: justincy/github-action-npm-release@2.0.2
         id: release
 
       - name: Setup Node
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         if: steps.release.outputs.released == 'true'
         with:
           node-version: '18.x'

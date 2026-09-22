@@ -1,0 +1,21 @@
+.github/workflows/dependabot-auto-merge.yml
+  s_73a28210314f3e::t_2a06095ad2023d 9
+.github/workflows/release-and-publish.yml
+  s_73a28210314f3e::t_32607b1d5190f2 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "8d3363a62e6013f28388a02a18eab457fcf8a879",
+  "prompts": {},
+  "sessions": {
+    "s_73a28210314f3e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0c7e1-9e5a-7db3-9f71-68bc14cd1883",
+        "model": "gpt-6-astra"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    }
+  }
+}

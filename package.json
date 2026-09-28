@@ -2,6 +2,10 @@
   "name": "@luminsports/eslint-config-vue",
   "version": "5.1.1",
   "description": "eslint-config-vue for Lumin Sports projects",
+  "scripts": {
+    "test": "node --test test/config.test.mjs"
+  },
+  "packageManager": "npm@11.19.0",
   "types": "./index.d.ts",
   "exports": {
     ".": "./index.mjs"
@@ -39,5 +43,8 @@
     "eslint-plugin-unused-imports": "^4.0",
     "eslint-plugin-vue": "^10.5",
     "vue-eslint-parser": "^10.2"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.5"
   }
 }

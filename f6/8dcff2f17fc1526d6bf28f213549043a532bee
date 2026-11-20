@@ -1,0 +1,25 @@
+.github/workflows/actions.lock
+  s_6c940de332579b::t_39673c5106402c 1-35
+.github/workflows/dependabot-auto-merge.yml
+  s_6c940de332579b::t_60dd793ca65d2f 15
+.github/workflows/release-and-publish.yml
+  s_6c940de332579b::t_ceff776f0f2653 20,26,40
+.github/workflows/test.yml
+  s_6c940de332579b::t_5620d21a7db325 16,21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f68dcff2f17fc1526d6bf28f213549043a532bee",
+  "prompts": {},
+  "sessions": {
+    "s_6c940de332579b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b9a6662f-a850-47ab-90d2-7d18832944e3",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "Ryan Brereton <ryan@luminsports.com>"
+    }
+  }
+}
